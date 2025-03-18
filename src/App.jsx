@@ -1,58 +1,35 @@
-import "./App.css";
-import {RouterProvider, createBrowserRouter} from "react-router-dom";
-import UrlProvider from "./context";
-
-import AppLayout from "./layouts/app-layout";
-import RequireAuth from "./components/require-auth";
-
-import RedirectLink from "./pages/redirect-link";
-import LandingPage from "./pages/landing";
-import Dashboard from "./pages/dashboard";
-import LinkPage from "./pages/link";
-import Auth from "./pages/auth";
-
-const router = createBrowserRouter([
-  {
-    element: <AppLayout />,
-    children: [
-      {
-        path: "/",
-        element: <LandingPage />,
-      },
-      {
-        path: "/auth",
-        element: <Auth />,
-      },
-      {
-        path: "/dashboard",
-        element: (
-          <RequireAuth>
-            <Dashboard />
-          </RequireAuth>
-        ),
-      },
-      {
-        path: "/link/:id",
-        element: (
-          <RequireAuth>
-            <LinkPage />
-          </RequireAuth>
-        ),
-      },
-      {
-        path: "/:id",
-        element: <RedirectLink />,
-      },
-    ],
-  },
-]);
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
 function App() {
+  const [count, setCount] = useState(0)
+
   return (
-    <UrlProvider>
-      <RouterProvider router={router} />
-    </UrlProvider>
-  );
+    <>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
 }
 
-export default App;
+export default App
